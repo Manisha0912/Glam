@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useContext,useEffect } from 'react';
 import { assets } from '../assets/assets';  // Import your assets properly
+import { AuthContext } from '../Context/AuthContext';
 
 const MyProfile = () => {
     const [image, setImage] = useState(false);
-
+    const { user } = useContext(AuthContext)
     const [userData, setUserData] = useState({
         name: "Shweta Kapoor",
         image: assets.profile_pic,
@@ -16,6 +17,20 @@ const MyProfile = () => {
         gender: 'Female',
         dob: '1995-06-15'
     });
+   
+      useEffect(() => {
+        if (user) {
+          setUserData({
+            name: user.name || '',
+            image: user.image || assets.profile_pic, // fallback to default
+            email: user.email || '',
+            phone: user.phone || '',
+            address: user.address || { line1: '', line2: '' },
+            gender: user.gender || '',
+            dob: user.dob || ''
+          })
+        }
+      }, [user])
 
     const [isEdit, setIsEdit] = useState(false);
 

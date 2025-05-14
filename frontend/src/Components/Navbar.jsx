@@ -368,17 +368,30 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { assets } from '../assets/assets';
 
+
+import { useContext } from 'react';
+import { AuthContext } from '../Context/AuthContext';
+
+
 const Navbar = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
-  const [token, setToken] = useState(true);
+  // const [token, setToken] = useState(true);
+
+
+  const { token, logout } = useContext(AuthContext);
+
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
+  // const handleLogout = () => {
+  //   setToken(false);
+  //   navigate('/login');
+  // };
   const handleLogout = () => {
-    setToken(false);
+    logout();  // call the logout method from context
     navigate('/login');
   };
-
+  
   return (
     <>
       {/* Main Navbar */}

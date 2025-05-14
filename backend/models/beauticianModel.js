@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
-const beauticianSchema = new mongoose.Schema({
+const beauticianSchema=new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    image: { type: String, required: true },
+    image:{type: String, required: true},
     service: { type: String, required: true },
     qualification: { type: String, required: true },
     experience: { type: String, required: true },
@@ -14,7 +14,7 @@ const beauticianSchema = new mongoose.Schema({
     slots_booked: { type: Object, default: {} },
     address: { type: Object, required: true },
     date: { type: Number, required: true },
-}, { minimize: false })
+}, { minimize: false });
 
 const beauticianModel = mongoose.models.beautician || mongoose.model("beautician", beauticianSchema);
 export default beauticianModel;

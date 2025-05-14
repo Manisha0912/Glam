@@ -1,30 +1,17 @@
-// import express from 'express';
-// import { loginAdmin, appointmentsAdmin, appointmentCancel, addDoctor, allDoctors, adminDashboard } from '../controllers/adminController.js';
-// import { changeAvailablity } from '../controllers/doctorController.js';
-// import authAdmin from '../middleware/authAdmin.js';
-// import upload from '../middleware/multer.js';
-// const adminRouter = express.Router();
-
-// adminRouter.post("/login", loginAdmin)
-// adminRouter.post("/add-doctor", authAdmin, upload.single('image'), addDoctor)
-// adminRouter.get("/appointments", authAdmin, appointmentsAdmin)
-// adminRouter.post("/cancel-appointment", authAdmin, appointmentCancel)
-// adminRouter.get("/all-doctors", authAdmin, allDoctors)
-// adminRouter.post("/change-availability", authAdmin, changeAvailablity)
-// adminRouter.get("/dashboard", authAdmin, adminDashboard)
-
-// export default adminRouter;
-
-
 import express from 'express';
-import { addBeautician } from '../controllers/adminController.js'
+import { addBeautician, allBeauticians } from '../controllers/adminController.js';
+import { login,register } from '../controllers/adminController.js';
 import upload from '../middlewares/multer.js';
+import authAdmin from '../middlewares/authAdmin.js'
+import { changeAvailability } from '../controllers/beauticianController.js';
 
 
 const adminRouter = express.Router();
-adminRouter.post("/add-beautician",  upload.single('image'), addBeautician)
 
+adminRouter.post("/add-beautician",authAdmin,upload.single('image'),addBeautician);
+adminRouter.post("/userregister",register)
+adminRouter.post("/userlogin",login)
+adminRouter.post("/all-beauticians",authAdmin,allBeauticians)
+adminRouter.post("/change-availability",authAdmin,changeAvailability)
 
 export default adminRouter;
-
-

@@ -4,13 +4,25 @@ import './index.css';
 import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import AppContextProvider from './Context/AppContext.jsx';
+import { AuthProvider } from './Context/AuthContext'
+import AdminContextProvider from './Context/AdminContext.jsx';
+import BeauticianContextProvider from './Context/BeauticianContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AppContextProvider>
-      <BrowserRouter>
+   
+      {/* <BrowserRouter> */}
+      <AuthProvider> 
+        <AdminContextProvider>
+          <BeauticianContextProvider>
+          <AppContextProvider>
         <App />
-      </BrowserRouter>
-    </AppContextProvider>
+        </AppContextProvider>
+        </BeauticianContextProvider>
+        </AdminContextProvider>
+        </AuthProvider>
+       
+      {/* </BrowserRouter> */}
+   
   </StrictMode>
 );
